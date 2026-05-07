@@ -1,6 +1,7 @@
 module Tyst
 
 using Base64
+using Printf
 
 function obscure(answer::String; key = "Tyst")
     bytes = transcode(UInt8, answer)
@@ -21,8 +22,8 @@ end
 export obscure, reveal
 
 PARTS = (
-    DOCHDR = """
-	#import "@preview/based:0.2.0": base64
+    DOCHDR = raw"""
+    #import "@preview/based:0.2.0": base64
 
     #set page(
       paper: "a4",
@@ -35,10 +36,10 @@ PARTS = (
     #show math.equation: it => {
       text(font: "STIX Two Math", size: 0.90em)[#box[#it]]
     }
-    """,
-    QUEHDR = """
-    #import "@preview/zebra:0.1.0": qrcode
 
+    """,
+    QUEHDR = raw"""
+    #import "@preview/zebra:0.1.0": qrcode
     #let the-qcode-raw = qrcode(width: 4.0em, "@OBSCURED@")
 
     #table(
@@ -59,15 +60,39 @@ PARTS = (
     )
 
     #set text(font: "Libertinus Sans", size: 11pt, lang: "pt")
+
     """,
-    QUEIMG = """
+    QUEIMG = raw"""
+
     """,
-	QUEASK = """
-    `[@WEIGHT@]`#h(.5em)@ASK@,
+    QUEASK = raw"""
+    `[@WEIGHT@]`#h(.75em)@ASK@,#h(.75em)
     #box[$@VARNAME@ = $ #box(stroke: (bottom: 0.6pt), width: 6em) $@UNIT@$]
-	""",
+
+    """,
 )
 
+# document header generation
+tydhdr() = PARTS.DOCHDR
+export tydhdr
 
+# question header generation
+tyqhdr(obscured::String) = replace(PARTS.QUEHDR, "@OBSCURED@" => obscured)
+export tyqhdr
+
+# question ask generation
+function tyqask(
+        ask::String;
+        wgt::Integer=1,
+        var::String,
+        uni::String,
+    )
+    return replace(PARTS.QUEASK,
+        "@WEIGHT@" => @sprintf("%02d", wgt),
+        "@ASK@" => ask,
+        "@VARNAME@" => var,
+        "@UNIT@" => uni,
+    )
+end
 
 end
