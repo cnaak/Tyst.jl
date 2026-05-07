@@ -63,7 +63,10 @@ PARTS = (
 
     """,
     QUEIMG = raw"""
-
+    #align(center)[
+      #image("@IMAGEFILE@", width: @IMAGEWIDTH@)
+    ]
+    
     """,
     QUEASK = raw"""
     `[@WEIGHT@]`#h(.75em)@ASK@,#h(.75em)
@@ -80,19 +83,34 @@ export tydhdr
 tyqhdr(obscured::String) = replace(PARTS.QUEHDR, "@OBSCURED@" => obscured)
 export tyqhdr
 
+# question image generation
+function tyqimg(
+        fil::String;
+        wid::String = "45%",
+    )
+    return replace(
+        PARTS.QUEIMG,
+        "@IMAGEFILE@" => fil,
+        "@IMAGEWIDTH@" => wid,
+    )
+end
+export tyqimg
+
 # question ask generation
 function tyqask(
         ask::String;
-        wgt::Integer=1,
+        wgt::Integer = 1,
         var::String,
         uni::String,
     )
-    return replace(PARTS.QUEASK,
+    return replace(
+        PARTS.QUEASK,
         "@WEIGHT@" => @sprintf("%02d", wgt),
         "@ASK@" => ask,
         "@VARNAME@" => var,
         "@UNIT@" => uni,
     )
 end
+export tyqask
 
 end
