@@ -1,9 +1,13 @@
 name = "Tyst"
 uuid = "37413edd-1bd2-4579-9cf9-464a91267cdc"
-authors = ["C. Naaktgeboren"]
 version = "0.1.0"
+authors = ["C. Naaktgeboren"]
+
+[deps]
+Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [compat]
+Base64 = "1.11.0"
 julia = "1.12"
 
 [extras]
