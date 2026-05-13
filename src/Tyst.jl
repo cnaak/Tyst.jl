@@ -28,7 +28,7 @@ PARTS = (
     #set page(
       paper: "a4",
       margin: (x: 20mm, top: 20mm, bottom: 25mm),
-      numbering: "– 1 –"
+      numbering: none,
     )
     #set text(font: "IBM Plex Mono", size: 9.5pt, lang: "pt")
     #set par(justify: true, leading: .75em)
