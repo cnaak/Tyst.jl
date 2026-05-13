@@ -27,7 +27,7 @@ PARTS = (
 
     #set page(
       paper: "a4",
-      margin: (x: 20mm, top: 20mm, bottom: 25mm),
+      margin: (x: 20mm, top: 20mm, bottom: 20mm),
       numbering: none,
     )
     #set text(font: "IBM Plex Mono", size: 9.5pt, lang: "pt")
