@@ -36,7 +36,7 @@ PARTS = (
     }
     #let ANSKEY = @ANSKEY@
     #let ANS(body, wid: 8em, hei: 0.7em) = box(
-        stroke: (bottom: 0.6pt),
+        stroke: (bottom: 0.4pt + luma(128)),
         width: wid,
         height: hei,
     )[#align(center)[
