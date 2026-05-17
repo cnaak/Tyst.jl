@@ -44,7 +44,6 @@ PARTS = (
             font: "Crimson Pro",
             size: 0.83em,
             fill: red.darken(25%),
-            baseline: -0.2em,
         )[#if ANSKEY [#body] else [#hide[#body]]]
     ]]
     // This determines whether or not answers will be displayed
